@@ -22,5 +22,6 @@ public class Main {
         student.display();
         student2.display();
         course.display();
+
     }
 }

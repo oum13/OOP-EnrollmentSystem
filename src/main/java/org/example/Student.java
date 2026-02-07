@@ -9,12 +9,6 @@ public class Student {
 
     }
 
-    public Student(String studentID, String studentName, String program){
-        this.studentID = studentID;
-        this.studentName = studentName;
-        this.program = program;
-    }
-
     public String getStudentID(){
         return studentID;
     }
@@ -37,5 +31,12 @@ public class Student {
 
     public void setProgram(String program){
         this.program = program;
+    }
+
+    public void display(){
+        System.out.println("Student ID: " + getStudentID());
+        System.out.println("Student Name: " + getStudentName());
+        System.out.println("Student Program: " + getProgram());
+        System.out.println();
     }
 }

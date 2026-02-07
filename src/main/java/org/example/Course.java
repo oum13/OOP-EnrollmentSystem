@@ -8,11 +8,6 @@ public class Course {
     public Course(){
 
     }
-    public Course(String courseID, String courseName, String program){
-        this.courseID = courseID;
-        this.courseName = courseName;
-        this.program = program;
-    }
 
     public String getCourseID(){
         return courseID;
@@ -36,5 +31,12 @@ public class Course {
 
     public void setProgram(String program){
         this.program = program;
+    }
+
+    public void display(){
+        System.out.println("Student ID: " + getCourseID());
+        System.out.println("Student Name: " + getCourseName());
+        System.out.println("Student ID: " + getProgram());
+        System.out.println();
     }
 }

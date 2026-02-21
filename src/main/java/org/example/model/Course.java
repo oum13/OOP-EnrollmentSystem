@@ -1,7 +1,7 @@
-package org.example;
+package org.example.model;
 
 public class Course {
-    private String courseID;
+    private int courseID;
     private String courseName;
     private String program;
 
@@ -9,11 +9,16 @@ public class Course {
 
     }
 
-    public String getCourseID(){
+    public Course(int courseID, String courseName){
+        this.courseID = courseID;
+        this.courseName = courseName;
+    }
+
+    public Integer getcourseID(){
         return courseID;
     }
 
-    public String getCourseName(){
+    public String getcourseName(){
         return courseName;
     }
 
@@ -21,11 +26,11 @@ public class Course {
         return program;
     }
 
-    public void setCourseID(String courseID){
+    public void setcourseID(Integer courseID){
         this.courseID = courseID;
     }
 
-    public void setCourseName(String courseName){
+    public void setcourseName(String courseName){
         this.courseName = courseName;
     }
 
@@ -34,8 +39,8 @@ public class Course {
     }
 
     public void display(){
-        System.out.println("Student ID: " + getCourseID());
-        System.out.println("Student Name: " + getCourseName());
+        System.out.println("Student ID: " + getcourseID());
+        System.out.println("Student Name: " + getcourseName());
         System.out.println("Student ID: " + getProgram());
         System.out.println();
     }

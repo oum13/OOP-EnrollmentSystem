@@ -1,7 +1,7 @@
-package org.example;
+package org.example.model;
 
 public class Student {
-    private String studentID;
+    private int studentID;
     private String studentName;
     private String program;
 
@@ -9,7 +9,12 @@ public class Student {
 
     }
 
-    public String getStudentID(){
+    public Student(int studentID, String studentName){
+        this.studentID = studentID;
+        this.studentName = studentName;
+    }
+
+    public Integer getStudentID(){
         return studentID;
     }
 
@@ -21,7 +26,7 @@ public class Student {
         return program;
     }
 
-    public void setStudentID(String studentID){
+    public void setStudentID(Integer studentID){
         this.studentID = studentID;
     }
 

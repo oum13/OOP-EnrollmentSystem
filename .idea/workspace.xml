@@ -5,18 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0739972e-bf7b-4c44-9a41-930f665ec5af" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Integrative Programming" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Instructor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/img2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/img3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/img4.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadME.md" beforeDir="false" afterPath="$PROJECT_DIR$/ReadME.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/Testing.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CourseRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CourseRegistration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/StudentRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/StudentRegistration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,21 +56,27 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Inheritance",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Umiko Myron Silva/IdeaProjects/OOP-EnrollmentSystem",
+    "last_opened_file_path": "C:/Users/umiko/IdeaProjects/OOP-EnrollmentSystem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/Umiko Myron Silva/IdeaProjects/Silva-EnrollmentSystem/src/main/java/org/example/Main.java",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\umiko\IdeaProjects\OOP-EnrollmentSystem\src\main\resources\images" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="OOP-EnrollmentSystem" />
@@ -82,7 +88,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
       </set>
     </attachedChunks>
   </component>
@@ -94,6 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1770425450621</updated>
       <workItem from="1770425451757" duration="5734000" />
+      <workItem from="1772852850467" duration="3848000" />
     </task>
     <servers />
   </component>

@@ -5,16 +5,17 @@ public class Course {
     private String courseName;
     private String program;
 
-    public Course(){
+    public Course() {
 
     }
 
-    public Course(int courseID, String courseName){
+    public Course(int courseID, String courseName, String program){
         this.courseID = courseID;
         this.courseName = courseName;
+        this.program = program;
     }
 
-    public Integer getcourseID(){
+    public int getcourseID(){
         return courseID;
     }
 
@@ -26,7 +27,7 @@ public class Course {
         return program;
     }
 
-    public void setcourseID(Integer courseID){
+    public void setcourseID(int courseID){
         this.courseID = courseID;
     }
 
@@ -39,9 +40,9 @@ public class Course {
     }
 
     public void display(){
-        System.out.println("Student ID: " + getcourseID());
-        System.out.println("Student Name: " + getcourseName());
-        System.out.println("Student ID: " + getProgram());
+        System.out.println("Course ID: " + getcourseID());
+        System.out.println("Course Name: " + getcourseName());
+        System.out.println("Program: " + getProgram());
         System.out.println();
     }
 }

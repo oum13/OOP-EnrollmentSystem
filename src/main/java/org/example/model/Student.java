@@ -1,46 +1,24 @@
 package org.example.model;
 
-public class Student {
-    private int studentID;
-    private String studentName;
+public class Student extends Person {
     private String program;
 
-    public Student(){
-
+    public Student(int ID, String name, String program){
+        super(name, ID);
+        this.program = program;
     }
 
-    public Student(int studentID, String studentName){
-        this.studentID = studentID;
-        this.studentName = studentName;
-    }
-
-    public Integer getStudentID(){
-        return studentID;
-    }
-
-    public String getStudentName(){
-        return studentName;
-    }
-
-    public String getProgram(){
+    public String getProgram() {
         return program;
     }
 
-    public void setStudentID(Integer studentID){
-        this.studentID = studentID;
-    }
-
-    public void setName(String studentName){
-        this.studentName = studentName;
-    }
-
-    public void setProgram(String program){
+    public void setProgram(String program) {
         this.program = program;
     }
 
     public void display(){
-        System.out.println("Student ID: " + getStudentID());
-        System.out.println("Student Name: " + getStudentName());
+        System.out.println("Student ID: " + getID());
+        System.out.println("Student Name: " + getName());
         System.out.println("Student Program: " + getProgram());
         System.out.println();
     }

@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.model.Course;
 import org.example.model.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,13 +13,16 @@ public class StudentRegistration {
         students.add(student);
     }
 
-    public void display(int index){
+    public void display(int id){
         if(students.isEmpty()){
             System.out.println("No students yet.");
             return;
         }
-
-        students.get(index).display();
+        for(int i = 0; i < students.size(); i++) {
+            if (students.get(i).getID() == id) {
+                students.get(i).display();
+            }
+        }
     }
 
     public void updateStudent(int id){
@@ -27,8 +31,8 @@ public class StudentRegistration {
             return;
         }
 
-        for(int i = 0; i < students.size(); i++){
-            if(students.get(i).getID() == id){
+        for (Student student : students) {
+            if (student.getID() == id) {
                 System.out.print("New Name: ");
                 String name = scan.nextLine();
 
@@ -39,9 +43,9 @@ public class StudentRegistration {
                 System.out.print("New Program: ");
                 String program = scan.nextLine();
 
-                students.get(i).setName(name);
-                students.get(i).setID(newId);
-                students.get(i).setProgram(program);
+                student.setName(name);
+                student.setID(newId);
+                student.setProgram(program);
 
                 System.out.println("Student updated successfully.");
                 return;
@@ -74,8 +78,12 @@ public class StudentRegistration {
             return;
         }
 
-        for(int i = 0; i < students.size(); i++){
-            students.get(i).display();
+        for (Student student : students) {
+            student.display();
         }
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 }

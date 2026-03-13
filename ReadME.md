@@ -10,6 +10,8 @@
 ---
 # Inheritance
 
+---
+
 **1. Screenshot (Proof of Inheritance)**
 
 []()![img2.png](src/main/resources/images/img2.png)

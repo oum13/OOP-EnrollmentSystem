@@ -4,7 +4,7 @@ import org.example.model.Course;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CourseRegistration {
+public class CourseRegistration{
     Scanner scan = new Scanner(System.in);
     private ArrayList<Course> courses = new ArrayList<>();
 
@@ -12,23 +12,17 @@ public class CourseRegistration {
         courses.add(course);
     }
 
-    public void display(int index){
-        if(courses.isEmpty()){
-            System.out.println("No courses yet.");
-            return;
+    public void display(int id){
+        for (Course course : courses) {
+            if (course.getcourseID() == id) {
+                course.display();
+            }
         }
-
-        courses.get(index).display();
     }
 
     public void updateCourse(int id){
-        if(courses.isEmpty()){
-            System.out.println("No courses yet.");
-            return;
-        }
-
-        for(int i = 0; i < courses.size(); i++){
-            if(courses.get(i).getcourseID() == id){
+        for (Course course : courses) {
+            if (course.getcourseID() == id) {
                 System.out.print("New Name: ");
                 String name = scan.nextLine();
 
@@ -39,24 +33,17 @@ public class CourseRegistration {
                 System.out.print("New Program: ");
                 String program = scan.nextLine();
 
-                courses.get(i).setcourseName(name);
-                courses.get(i).setcourseID(newId);
-                courses.get(i).setProgram(program);
+                course.setcourseName(name);
+                course.setcourseID(newId);
+                course.setProgram(program);
 
                 System.out.println("Course updated successfully.");
                 return;
             }
         }
-
-        System.out.println("Course not found.");
     }
 
     public void removeCourse(int id){
-        if(courses.isEmpty()){
-            System.out.println("No courses yet.");
-            return;
-        }
-
         for (int i = 0; i < courses.size(); i++) {
             if (courses.get(i).getcourseID() == id) {
                 courses.remove(i);
@@ -64,18 +51,15 @@ public class CourseRegistration {
                 return;
             }
         }
-
-        System.out.println("Course not found.");
     }
 
     public void displayAll(){
-        if(courses.isEmpty()){
-            System.out.println("No courses yet.");
-            return;
+        for (Course course : courses) {
+            course.display();
         }
+    }
 
-        for(int i = 0; i < courses.size(); i++){
-            courses.get(i).display();
-        }
+    public ArrayList<Course> getCourses() {
+        return courses;
     }
 }

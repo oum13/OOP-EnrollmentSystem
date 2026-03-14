@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.model.Course;
 import org.example.model.Student;
+import org.example.model.Instructor;
 import org.example.service.CourseRegistration;
 import org.example.service.StudentRegistration;
 import org.example.service.TuitionFeePayment;
@@ -58,6 +59,8 @@ public class Main {
 
                         Student p = new Student(id, name, program);
                         studentRegistration.saveStudent(p);
+
+                        p.mainTask();
 
                         System.out.print("How many units? ");
                         int units = scan.nextInt();

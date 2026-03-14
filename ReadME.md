@@ -32,4 +32,6 @@
 
 []()![img7.png](src/main/resources/images/img7.png)
 
+[]()![img8.png](src/main/resources/images/img8.png)
+
 // Instructor is not yet implemented.

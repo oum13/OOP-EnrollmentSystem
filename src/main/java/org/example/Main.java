@@ -33,7 +33,8 @@ public class Main {
             System.out.println("4 - Print All");
             System.out.println("5 - Update");
             System.out.println("6 - Tuition");
-            System.out.println("7 - Exit");
+            System.out.println("7 - Stud or Ins");
+            System.out.println("8 - Exit");
             System.out.print("What? ");
             choice = scan.nextInt();
 
@@ -174,6 +175,12 @@ public class Main {
                     }
                     break;
                 case 7:
+                    Student s = new Student(2020,"Nas","IT");
+                    s.mainTask();
+                    Instructor i = new Instructor("ASD", 123);
+                    i.mainTask();
+                    break;
+                case 8:
                     System.exit(0);
                     break;
                 default:

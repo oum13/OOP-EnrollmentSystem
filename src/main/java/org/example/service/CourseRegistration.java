@@ -1,74 +1,65 @@
 package org.example.service;
 
 import org.example.model.Course;
-import org.example.model.Student;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-public class CourseRegistration {
+
+public class CourseRegistration{
     Scanner scan = new Scanner(System.in);
     private ArrayList<Course> courses = new ArrayList<>();
 
-    // Create
     public void saveCourse(Course course){
         courses.add(course);
     }
 
-    // Read
-    public void display(int index){
-        if(courses.isEmpty()){
-            System.out.println("No courses yet.");
+    public void display(int id){
+        for (Course course : courses) {
+            if (course.getcourseID() == id) {
+                course.display();
+            }
         }
-        System.out.println(courses.get(index).getcourseName());
-        System.out.println(courses.get(index).getcourseID());
     }
 
-    // Update
     public void updateCourse(int id){
-        if(courses.isEmpty()){
-            System.out.println("No courses yet.");
-            return;
-        }
-
-        for(int i = 0; i < courses.size(); i++){
-            if(courses.get(i).getcourseID() == id){
-                System.out.print("Name: ");
+        for (Course course : courses) {
+            if (course.getcourseID() == id) {
+                System.out.print("New Name: ");
                 String name = scan.nextLine();
 
-                System.out.print("ID: ");
-                id = scan.nextInt();
+                System.out.print("New ID: ");
+                int newId = scan.nextInt();
+                scan.nextLine();
 
-                courses.get(i).setcourseName(name);
-                courses.get(i).setcourseID(id);
+                System.out.print("New Program: ");
+                String program = scan.nextLine();
 
-                System.out.println("Courses updated successfully.");
+                course.setcourseName(name);
+                course.setcourseID(newId);
+                course.setProgram(program);
+
+                System.out.println("Course updated successfully.");
                 return;
             }
         }
     }
 
-    // Remove
     public void removeCourse(int id){
-        if(courses.isEmpty()){
-            System.out.println("No courses yet.");
-        }
         for (int i = 0; i < courses.size(); i++) {
-
             if (courses.get(i).getcourseID() == id) {
                 courses.remove(i);
-                System.out.println("Person with ID " + id + " removed.");
+                System.out.println("Course with ID " + id + " removed.");
                 return;
             }
         }
     }
 
-    // Display All
     public void displayAll(){
-        for(int i = 0; i < courses.size(); i++){
-            System.out.println("");
-            System.out.println(courses.get(i).getcourseName());
-            System.out.println(courses.get(i).getcourseID());
+        for (Course course : courses) {
+            course.display();
         }
     }
-}
 
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+}

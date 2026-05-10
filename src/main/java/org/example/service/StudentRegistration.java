@@ -1,73 +1,89 @@
 package org.example.service;
 
+import org.example.model.Course;
 import org.example.model.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class StudentRegistration {
     Scanner scan = new Scanner(System.in);
-    private ArrayList <Student> students = new ArrayList<>();
+    private ArrayList<Student> students = new ArrayList<>();
 
-    // Create
     public void saveStudent(Student student){
         students.add(student);
     }
 
-    // Read
-    public void display(int index){
+    public void display(int id){
         if(students.isEmpty()){
             System.out.println("No students yet.");
+            return;
         }
-        System.out.println(students.get(index).getStudentName());
-        System.out.println(students.get(index).getStudentID());
+        for(int i = 0; i < students.size(); i++) {
+            if (students.get(i).getID() == id) {
+                students.get(i).display();
+            }
+        }
     }
 
-    // Update
     public void updateStudent(int id){
         if(students.isEmpty()){
             System.out.println("No students yet.");
             return;
         }
 
-        for(int i = 0; i < students.size(); i++){
-            if(students.get(i).getStudentID() == id){
-                System.out.print("Name: ");
+        for (Student student : students) {
+            if (student.getID() == id) {
+                System.out.print("New Name: ");
                 String name = scan.nextLine();
 
+                System.out.print("New ID: ");
+                int newId = scan.nextInt();
                 scan.nextLine();
 
-                System.out.print("ID: ");
-                id = scan.nextInt();
+                System.out.print("New Program: ");
+                String program = scan.nextLine();
 
-                students.get(i).setName(name);
-                students.get(i).setStudentID(id);
+                student.setName(name);
+                student.setID(newId);
+                student.setProgram(program);
 
-                System.out.println("Students updated successfully.");
+                System.out.println("Student updated successfully.");
                 return;
             }
         }
+
+        System.out.println("Student not found.");
     }
 
-    // Remove
     public void removeStudent(int id){
         if(students.isEmpty()){
             System.out.println("No students yet.");
+            return;
         }
-        for (int i = 0; i < students.size(); i++) {
 
-            if (students.get(i).getStudentID() == id) {
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getID() == id) {
                 students.remove(i);
-                System.out.println("Person with ID " + id + " removed.");
+                System.out.println("Student with ID " + id + " removed.");
                 return;
             }
         }
+
+        System.out.println("Student not found.");
     }
 
-    // Display All
     public void displayAll(){
-        for(int i = 0; i < students.size(); i++){
-            System.out.println("");
-            System.out.println(students.get(i).getStudentName());
-            System.out.println(students.get(i).getStudentID());
+        if(students.isEmpty()){
+            System.out.println("No students yet.");
+            return;
         }
+
+        for (Student student : students) {
+            student.display();
+        }
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 }

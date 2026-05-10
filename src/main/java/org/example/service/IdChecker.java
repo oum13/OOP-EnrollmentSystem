@@ -4,19 +4,21 @@ import java.util.Scanner;
 
 public class IdChecker {
     Scanner scan = new Scanner(System.in);
-    CourseRegistration courseRegistration;
-    StudentRegistration studentRegistration;
+    CourseReg courseRegistration;
+    StudentReg studentRegistration;
     private int sc;
     private int id;
     private int identification;
     private boolean found = false;
 
-    public IdChecker(StudentRegistration studentRegistration, CourseRegistration courseRegistration){
+    public IdChecker(StudentReg studentRegistration, CourseReg courseRegistration){
         this.courseRegistration = courseRegistration;
         this.studentRegistration = studentRegistration;
     }
 
     public void checkID(int n){
+        found = false;
+        id = 0;
         if(n == 1){
             System.out.println("Student - 1 | Course - 2");
             sc = scan.nextInt();

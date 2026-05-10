@@ -3,9 +3,13 @@ package org.example;
 import org.example.model.Course;
 import org.example.model.Student;
 import org.example.model.Instructor;
-import org.example.service.CourseRegistration;
+import org.example.service.StudentReg;
 import org.example.service.StudentRegistration;
+import org.example.service.CourseReg;
+import org.example.service.CourseRegistration;
+import org.example.service.TuitionFP;
 import org.example.service.TuitionFeePayment;
+import org.example.service.CampusRegistrar;
 import org.example.service.IdChecker;
 
 import java.util.Scanner;
@@ -15,10 +19,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        StudentRegistration studentRegistration = new StudentRegistration();
-        CourseRegistration courseRegistration = new CourseRegistration();
-        TuitionFeePayment tuitionFeePayment = new TuitionFeePayment(studentRegistration);
-        IdChecker idChecker = new IdChecker(studentRegistration, courseRegistration);
+        StudentReg studentReg = new StudentRegistration();
+        CourseReg courseReg = new CourseRegistration();
+        TuitionFP tuitionFP = new TuitionFeePayment(studentReg);
+        CampusRegistrar campusRegistrar = new CampusRegistrar(studentReg, courseReg, tuitionFP);
+        IdChecker idChecker = new IdChecker(studentReg, courseReg);
 
         while(true){
             String name;
@@ -37,7 +42,6 @@ public class Main {
             System.out.println("8 - Exit");
             System.out.print("What? ");
             choice = scan.nextInt();
-
             scan.nextLine();
 
             switch(choice){
@@ -59,13 +63,11 @@ public class Main {
                         program = scan.nextLine();
 
                         Student p = new Student(id, name, program);
-                        studentRegistration.saveStudent(p);
-
+                        campusRegistrar.saveStudent(p);
                         p.mainTask();
 
                         System.out.print("How many units? ");
                         int units = scan.nextInt();
-
                         scan.nextLine();
 
                         System.out.print("Scholarship (Yes / No)? ");
@@ -77,23 +79,16 @@ public class Main {
                             System.out.println("3 - 100%");
                             System.out.print("How many percent? ");
                             int c = scan.nextInt();
-
                             switch(c){
-                                case 1:
-                                    discount = 0.50;
-                                    break;
-                                case 2:
-                                    discount = 0.75;
-                                    break;
-                                case 3:
-                                    discount = 1.00;
-                                    break;
-                                default:
-                                    System.out.println("Oops");
+                                case 1: discount = 0.50; break;
+                                case 2: discount = 0.75; break;
+                                case 3: discount = 1.00; break;
+                                default: System.out.println("Oops");
                             }
                         }
 
-                        System.out.printf("Your balance is: %.2f \n", tuitionFeePayment.calculateTuitionFee(units,discount));
+                        System.out.printf("Your balance is: %.2f \n",
+                                campusRegistrar.calculateTuitionFee(units, discount));
 
                     } else if(sc == 2){
                         System.out.print("Name: ");
@@ -107,45 +102,48 @@ public class Main {
                         program = scan.nextLine();
 
                         Course c = new Course(id, name, program);
-                        courseRegistration.saveCourse(c);
+                        campusRegistrar.saveCourse(c);
                     }
                     break;
+
                 case 2:
                     idChecker.checkID(1);
-
                     if(idChecker.getStOrC() == 1){
-                        studentRegistration.display(idChecker.getID());
+                        campusRegistrar.displayStudent(idChecker.getID());
                     } else if(idChecker.getStOrC() == 2){
-                        courseRegistration.display(idChecker.getID());
+                        campusRegistrar.displayCourse(idChecker.getID());
                     }
                     break;
+
                 case 3:
                     idChecker.checkID(1);
-
                     if(idChecker.getStOrC() == 1){
-                        studentRegistration.removeStudent(idChecker.getID());
+                        campusRegistrar.removeStudent(idChecker.getID());
                     } else if(idChecker.getStOrC() == 2){
-                        courseRegistration.removeCourse(idChecker.getID());
+                        campusRegistrar.removeCourse(idChecker.getID());
                     }
                     break;
-                case 4:
-                    idChecker.checkID(1);
 
-                    if(idChecker.getStOrC() == 1) {
-                        studentRegistration.displayAll();
-                    } else if(idChecker.getStOrC() == 2){
-                        courseRegistration.displayAll();
+                case 4:
+                    System.out.println("Student - 1 | Course - 2");
+                    sc = scan.nextInt();
+                    scan.nextLine();
+                    if(sc == 1){
+                        campusRegistrar.displayAllStudents();
+                    } else if(sc == 2){
+                        campusRegistrar.displayAllCourses();
                     }
                     break;
+
                 case 5:
                     idChecker.checkID(1);
-
                     if(idChecker.getStOrC() == 1){
-                        studentRegistration.updateStudent(idChecker.getID());
+                        campusRegistrar.updateStudent(idChecker.getID());
                     } else if(idChecker.getStOrC() == 2){
-                        courseRegistration.updateCourse(idChecker.getID());
+                        campusRegistrar.updateCourse(idChecker.getID());
                     }
                     break;
+
                 case 6:
                     int c;
                     try{
@@ -160,29 +158,32 @@ public class Main {
                     idChecker.checkID(2);
 
                     if(c == 1){
-                        if(tuitionFeePayment.isFullyPaid(idChecker.getID())){
+                        if(campusRegistrar.isFullyPaid(idChecker.getID())){
                             System.out.println("Tuition is fully paid.");
                             break;
                         }
                         System.out.printf("Remaining Balance: %.2f \n",
-                                tuitionFeePayment.getRemainingBalance((idChecker.getID())));
+                                campusRegistrar.getRemainingBalance(idChecker.getID()));
                         System.out.print("How much will you pay? ");
                         double am = scan.nextDouble();
-                        tuitionFeePayment.makePayment(am);
-                    }else if(c == 2){
+                        campusRegistrar.makePayment(am);
+                    } else if(c == 2){
                         System.out.printf("Remaining Balance: %.2f \n",
-                                tuitionFeePayment.getRemainingBalance((idChecker.getID())));
+                                campusRegistrar.getRemainingBalance(idChecker.getID()));
                     }
                     break;
+
                 case 7:
-                    Student s = new Student(2020,"Nas","IT");
+                    Student s = new Student(2020, "Nas", "IT");
                     s.mainTask();
                     Instructor i = new Instructor("ASD", 123);
                     i.mainTask();
                     break;
+
                 case 8:
                     System.exit(0);
                     break;
+
                 default:
                     System.out.println("Invalid choice.");
             }

@@ -1,25 +1,22 @@
 package org.example.service;
 
-import org.example.model.Student;
 import java.util.ArrayList;
 
-public class TuitionFeePayment {
+public class TuitionFeePayment implements TuitionFP{
     ArrayList<Double> balances = new ArrayList<>();
 
     private double pricePerUnit = 1000.00;
-    private double balance;
-    private double totalTuition;
     private int index;
-    StudentRegistration studentRegistration;
+    StudentReg studentRegistration;
 
-    public TuitionFeePayment(StudentRegistration studentRegistration){
+    public TuitionFeePayment(StudentReg studentRegistration){
         this.studentRegistration = studentRegistration;
     }
 
     public double calculateTuitionFee(int units, double discountRate){
-        totalTuition = (units * pricePerUnit);
+        double totalTuition = (units * pricePerUnit);
         double discount = totalTuition * discountRate;
-        balance = totalTuition - discount;
+        double balance = totalTuition - discount;
         balances.add(balance);
         return balance;
     }
@@ -47,7 +44,7 @@ public class TuitionFeePayment {
                 index = i;
             }
         }
-        if(b == 0.00){
+        if(b <= 0.0){
             return true;
         }else{
             return false;

@@ -1,32 +1,31 @@
 package org.example.service;
 
-import org.example.model.Course;
 import org.example.model.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentRegistration {
+public class StudentRegistration implements StudentReg {
     Scanner scan = new Scanner(System.in);
     private ArrayList<Student> students = new ArrayList<>();
 
-    public void saveStudent(Student student){
+    public void saveStudent(Student student) {
         students.add(student);
     }
 
-    public void display(int id){
-        if(students.isEmpty()){
+    public void display(int id) {
+        if (students.isEmpty()) {
             System.out.println("No students yet.");
             return;
         }
-        for(int i = 0; i < students.size(); i++) {
+        for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getID() == id) {
                 students.get(i).display();
             }
         }
     }
 
-    public void updateStudent(int id){
-        if(students.isEmpty()){
+    public void updateStudent(int id) {
+        if (students.isEmpty()) {
             System.out.println("No students yet.");
             return;
         }
@@ -55,8 +54,8 @@ public class StudentRegistration {
         System.out.println("Student not found.");
     }
 
-    public void removeStudent(int id){
-        if(students.isEmpty()){
+    public void removeStudent(int id) {
+        if (students.isEmpty()) {
             System.out.println("No students yet.");
             return;
         }
@@ -72,8 +71,8 @@ public class StudentRegistration {
         System.out.println("Student not found.");
     }
 
-    public void displayAll(){
-        if(students.isEmpty()){
+    public void displayAll() {
+        if (students.isEmpty()) {
             System.out.println("No students yet.");
             return;
         }

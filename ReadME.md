@@ -34,4 +34,15 @@
 
 []()![img8.png](src/main/resources/images/img8.png)
 
-// Instructor is not yet implemented.
+---
+# Interface
+
+---
+**Made Interfaces and made use of CampusRegistrar**
+
+[]()![img 9.png](target/classes/images/img%209.png)
+
+[]()![img10.png](target/classes/images/img10.png)
+
+[]()![img11.png](target/classes/images/img11.png)
+

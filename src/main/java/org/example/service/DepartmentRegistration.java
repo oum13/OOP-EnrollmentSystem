@@ -1,5 +1,7 @@
 package org.example.service;
 
+import org.example.customexception.DepartmentNotFoundException;
+import org.example.customexception.DuplicateDepartmentIDException;
 import org.example.model.Department;
 import org.example.model.Instructor;
 import org.example.model.Section;
@@ -12,13 +14,18 @@ public class DepartmentRegistration implements DepartmentReg {
     private ArrayList<Department> departments = new ArrayList<>();
 
     @Override
-    public void saveDepartment(Department department) {
+    public void saveDepartment(Department department) throws DuplicateDepartmentIDException {
+        for (Department d : departments) {
+            if (d.getDepartmentID() == department.getDepartmentID()) {
+                throw new DuplicateDepartmentIDException(department.getDepartmentID());
+            }
+        }
         departments.add(department);
         System.out.println("Department \"" + department.getDepartmentName() + "\" saved successfully.");
     }
 
     @Override
-    public void addSectionToDepartment(int departmentID, Section section) {
+    public void addSectionToDepartment(int departmentID, Section section) throws DepartmentNotFoundException {
         for (Department department : departments) {
             if (department.getDepartmentID() == departmentID) {
                 department.getSections().add(section);
@@ -27,7 +34,7 @@ public class DepartmentRegistration implements DepartmentReg {
                 return;
             }
         }
-        System.out.println("Department with ID " + departmentID + " not found.");
+        throw new DepartmentNotFoundException(departmentID);
     }
 
     @Override
@@ -80,7 +87,7 @@ public class DepartmentRegistration implements DepartmentReg {
     }
 
     @Override
-    public void viewHierarchy(int departmentID) {
+    public void viewHierarchy(int departmentID) throws DepartmentNotFoundException {
         for (Department department : departments) {
             if (department.getDepartmentID() == departmentID) {
                 System.out.println("==============================================");
@@ -104,14 +111,12 @@ public class DepartmentRegistration implements DepartmentReg {
                     System.out.println("  " + sectionBranch + " SECTION : " + section.getSectionName()
                             + "  (ID: " + section.getSectionID() + ")");
 
-                    // Instructor
                     Instructor instructor = section.getInstructor();
                     String instructorLine = (instructor != null)
                             ? instructor.getName() + "  (ID: " + instructor.getID() + ")"
                             : "Not assigned";
                     System.out.println("  │    ├─ Instructor : " + instructorLine);
 
-                    // Enrolled Students
                     ArrayList<Student> students = section.getEnrolledStudents();
                     System.out.println("  │    └─ Enrolled Students ["
                             + students.size() + "/" + Section.MAX_CAPACITY + "] :");
@@ -136,7 +141,7 @@ public class DepartmentRegistration implements DepartmentReg {
                 return;
             }
         }
-        System.out.println("Department with ID " + departmentID + " not found.");
+        throw new DepartmentNotFoundException(departmentID);
     }
 
     @Override

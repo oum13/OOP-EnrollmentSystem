@@ -1,6 +1,8 @@
 package org.example.service;
 
+import org.example.customexception.DuplicateStudentIDException;
 import org.example.model.Student;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,10 +10,18 @@ public class StudentRegistration implements StudentReg {
     Scanner scan = new Scanner(System.in);
     private ArrayList<Student> students = new ArrayList<>();
 
-    public void saveStudent(Student student) {
+    @Override
+    public void saveStudent(Student student) throws DuplicateStudentIDException {
+        for (Student s : students) {
+            if (s.getID() == student.getID()) {
+                throw new DuplicateStudentIDException(student.getID());
+            }
+        }
         students.add(student);
+        System.out.println("Student \"" + student.getName() + "\" registered successfully.");
     }
 
+    @Override
     public void display(int id) {
         if (students.isEmpty()) {
             System.out.println("No students yet.");
@@ -28,6 +38,7 @@ public class StudentRegistration implements StudentReg {
         }
     }
 
+    @Override
     public void updateStudent(int id) {
         if (students.isEmpty()) {
             System.out.println("No students yet.");
@@ -58,6 +69,7 @@ public class StudentRegistration implements StudentReg {
         System.out.println("Student not found.");
     }
 
+    @Override
     public void removeStudent(int id) {
         if (students.isEmpty()) {
             System.out.println("No students yet.");
@@ -75,6 +87,7 @@ public class StudentRegistration implements StudentReg {
         System.out.println("Student not found.");
     }
 
+    @Override
     public void displayAll() {
         if (students.isEmpty()) {
             System.out.println("No students yet.");
@@ -89,6 +102,7 @@ public class StudentRegistration implements StudentReg {
         }
     }
 
+    @Override
     public ArrayList<Student> getStudents() {
         return students;
     }

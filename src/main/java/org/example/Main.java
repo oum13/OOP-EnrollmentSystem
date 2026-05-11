@@ -1,22 +1,31 @@
 package org.example;
 
+import org.example.customexception.DepartmentNotFoundException;
+import org.example.customexception.DuplicateCourseIDException;
+import org.example.customexception.DuplicateDepartmentIDException;
+import org.example.customexception.DuplicateInstructorIDException;
+import org.example.customexception.DuplicateSectionIDException;
+import org.example.customexception.DuplicateStudentIDException;
+import org.example.customexception.InvalidPaymentAmountException;
+import org.example.customexception.SectionFullException;
+import org.example.customexception.SectionNotFoundException;
 import org.example.model.Course;
 import org.example.model.Department;
-import org.example.model.Student;
 import org.example.model.Instructor;
 import org.example.model.Section;
-import org.example.service.StudentReg;
-import org.example.service.StudentRegistration;
-import org.example.service.SectionReg;
-import org.example.service.SectionRegistration;
+import org.example.model.Student;
+import org.example.service.CampusRegistrar;
 import org.example.service.CourseReg;
 import org.example.service.CourseRegistration;
-import org.example.service.TuitionFP;
-import org.example.service.TuitionFeePayment;
 import org.example.service.DepartmentReg;
 import org.example.service.DepartmentRegistration;
-import org.example.service.CampusRegistrar;
 import org.example.service.IdChecker;
+import org.example.service.SectionReg;
+import org.example.service.SectionRegistration;
+import org.example.service.StudentReg;
+import org.example.service.StudentRegistration;
+import org.example.service.TuitionFP;
+import org.example.service.TuitionFeePayment;
 
 import java.util.Scanner;
 
@@ -31,7 +40,8 @@ public class Main {
         DepartmentReg departmentReg = new DepartmentRegistration();
         CampusRegistrar campusRegistrar = new CampusRegistrar(studentReg, courseReg, tuitionFP, sectionReg, departmentReg);
         IdChecker idChecker = new IdChecker(studentReg, courseReg, sectionReg);
-        while(true){
+
+        while (true) {
             String name;
             String program;
             int choice;
@@ -51,13 +61,14 @@ public class Main {
             choice = scan.nextInt();
             scan.nextLine();
 
-            switch(choice){
+            switch (choice) {
+
                 case 1:
                     System.out.println("Student - 1 | Course - 2");
                     sc = scan.nextInt();
                     scan.nextLine();
 
-                    if (sc == 1){
+                    if (sc == 1) {
                         double discount = 0.00;
                         System.out.print("Name: ");
                         name = scan.nextLine();
@@ -69,34 +80,39 @@ public class Main {
                         System.out.print("Program: ");
                         program = scan.nextLine();
 
-                        Student p = new Student(id, name, program);
-                        campusRegistrar.saveStudent(p);
+                        try {
+                            campusRegistrar.saveStudent(new Student(id, name, program));
 
-                        System.out.print("How many units? ");
-                        int units = scan.nextInt();
-                        scan.nextLine();
+                            System.out.print("How many units? ");
+                            int units = scan.nextInt();
+                            scan.nextLine();
 
-                        System.out.print("Scholarship (Yes / No)? ");
-                        String dec = scan.nextLine().toLowerCase();
+                            System.out.print("Scholarship (Yes / No)? ");
+                            String dec = scan.nextLine().toLowerCase();
 
-                        if(dec.equals("yes")){
-                            System.out.println("1 - 50%");
-                            System.out.println("2 - 75%");
-                            System.out.println("3 - 100%");
-                            System.out.print("How many percent? ");
-                            int c = scan.nextInt();
-                            switch(c){
-                                case 1: discount = 0.50; break;
-                                case 2: discount = 0.75; break;
-                                case 3: discount = 1.00; break;
-                                default: System.out.println("Oops");
+                            if (dec.equals("yes")) {
+                                System.out.println("1 - 50%");
+                                System.out.println("2 - 75%");
+                                System.out.println("3 - 100%");
+                                System.out.print("How many percent? ");
+                                int c = scan.nextInt();
+                                scan.nextLine();
+                                switch (c) {
+                                    case 1: discount = 0.50; break;
+                                    case 2: discount = 0.75; break;
+                                    case 3: discount = 1.00; break;
+                                    default: System.out.println("Invalid scholarship option.");
+                                }
                             }
+
+                            System.out.printf("Your balance is: %.2f%n",
+                                    campusRegistrar.calculateTuitionFee(units, discount));
+
+                        } catch (DuplicateStudentIDException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
                         }
 
-                        System.out.printf("Your balance is: %.2f \n",
-                                campusRegistrar.calculateTuitionFee(units, discount));
-
-                    } else if(sc == 2){
+                    } else if (sc == 2) {
                         System.out.print("Name: ");
                         name = scan.nextLine();
 
@@ -107,25 +123,28 @@ public class Main {
                         System.out.print("Program: ");
                         program = scan.nextLine();
 
-                        Course c = new Course(id, name, program);
-                        campusRegistrar.saveCourse(c);
+                        try {
+                            campusRegistrar.saveCourse(new Course(id, name, program));
+                        } catch (DuplicateCourseIDException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        }
                     }
                     break;
 
                 case 2:
                     idChecker.checkID(1);
-                    if(idChecker.getStOrC() == 1){
+                    if (idChecker.getStOrC() == 1) {
                         campusRegistrar.displayStudent(idChecker.getID());
-                    } else if(idChecker.getStOrC() == 2){
+                    } else if (idChecker.getStOrC() == 2) {
                         campusRegistrar.displayCourse(idChecker.getID());
                     }
                     break;
 
                 case 3:
                     idChecker.checkID(1);
-                    if(idChecker.getStOrC() == 1){
+                    if (idChecker.getStOrC() == 1) {
                         campusRegistrar.removeStudent(idChecker.getID());
-                    } else if(idChecker.getStOrC() == 2){
+                    } else if (idChecker.getStOrC() == 2) {
                         campusRegistrar.removeCourse(idChecker.getID());
                     }
                     break;
@@ -134,47 +153,49 @@ public class Main {
                     System.out.println("Student - 1 | Course - 2");
                     sc = scan.nextInt();
                     scan.nextLine();
-                    if(sc == 1){
+                    if (sc == 1) {
                         campusRegistrar.displayAllStudents();
-                    } else if(sc == 2){
+                    } else if (sc == 2) {
                         campusRegistrar.displayAllCourses();
                     }
                     break;
 
                 case 5:
                     idChecker.checkID(1);
-                    if(idChecker.getStOrC() == 1){
+                    if (idChecker.getStOrC() == 1) {
                         campusRegistrar.updateStudent(idChecker.getID());
-                    } else if(idChecker.getStOrC() == 2){
+                    } else if (idChecker.getStOrC() == 2) {
                         campusRegistrar.updateCourse(idChecker.getID());
                     }
                     break;
 
                 case 6:
                     int c;
-                    try{
-                        System.out.println("1 - Make Payment");
-                        System.out.println("2 - Check Balance");
-                        System.out.println("What do you want to do?");
-                        c = scan.nextInt();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    System.out.println("1 - Make Payment");
+                    System.out.println("2 - Check Balance");
+                    System.out.print("What do you want to do? ");
+                    c = scan.nextInt();
+                    scan.nextLine();
 
                     idChecker.checkID(2);
 
-                    if(c == 1){
-                        if(campusRegistrar.isFullyPaid(idChecker.getID())){
+                    if (c == 1) {
+                        if (campusRegistrar.isFullyPaid(idChecker.getID())) {
                             System.out.println("Tuition is fully paid.");
                             break;
                         }
-                        System.out.printf("Remaining Balance: %.2f \n",
+                        System.out.printf("Remaining Balance: %.2f%n",
                                 campusRegistrar.getRemainingBalance(idChecker.getID()));
                         System.out.print("How much will you pay? ");
                         double am = scan.nextDouble();
-                        campusRegistrar.makePayment(am);
-                    } else if(c == 2){
-                        System.out.printf("Remaining Balance: %.2f \n",
+                        scan.nextLine();
+                        try {
+                            campusRegistrar.makePayment(am);
+                        } catch (InvalidPaymentAmountException e) {
+                            System.out.println("[ERROR] " + e.getMessage());
+                        }
+                    } else if (c == 2) {
+                        System.out.printf("Remaining Balance: %.2f%n",
                                 campusRegistrar.getRemainingBalance(idChecker.getID()));
                     }
                     break;
@@ -210,10 +231,17 @@ public class Main {
                                     break;
                                 }
                             }
+
                             if (pickedCourse == null) {
-                                System.out.println("Course with ID " + pickedCourseID + " not found. Register it first.");
+                                System.out.println("[ERROR] Course with ID " + pickedCourseID
+                                        + " not found. Register it first.");
                             } else {
-                                campusRegistrar.saveSection(new Section(newSecID, newSecName, pickedCourse));
+                                try {
+                                    campusRegistrar.saveSection(
+                                            new Section(newSecID, newSecName, pickedCourse));
+                                } catch (DuplicateSectionIDException e) {
+                                    System.out.println("[ERROR] " + e.getMessage());
+                                }
                             }
                             break;
 
@@ -226,7 +254,14 @@ public class Main {
                             System.out.print("Section ID to assign to : ");
                             int assignSecID = scan.nextInt();
                             scan.nextLine();
-                            campusRegistrar.assignInstructor(assignSecID, new Instructor(instrName, instrID));
+                            try {
+                                campusRegistrar.assignInstructor(assignSecID,
+                                        new Instructor(instrName, instrID));
+                            } catch (SectionNotFoundException e) {
+                                System.out.println("[ERROR] " + e.getMessage());
+                            } catch (DuplicateInstructorIDException e) {
+                                System.out.println("[ERROR] " + e.getMessage());
+                            }
                             break;
 
                         case 3:
@@ -245,9 +280,16 @@ public class Main {
                                 }
                             }
                             if (enrollStudent == null) {
-                                System.out.println("Student with ID " + enrollStudID + " not found. Register the student first.");
+                                System.out.println("[ERROR] Student with ID " + enrollStudID
+                                        + " not found. Register the student first.");
                             } else {
-                                campusRegistrar.enrollStudentInSection(enrollSecID, enrollStudent);
+                                try {
+                                    campusRegistrar.enrollStudentInSection(enrollSecID, enrollStudent);
+                                } catch (SectionNotFoundException e) {
+                                    System.out.println("[ERROR] " + e.getMessage());
+                                } catch (SectionFullException e) {
+                                    System.out.println("[ERROR] " + e.getMessage());
+                                }
                             }
                             break;
 
@@ -274,10 +316,6 @@ public class Main {
                     }
                     break;
 
-                case 9:
-                    System.exit(0);
-                    break;
-
                 case 8:
                     System.out.println("--- Department Menu ---");
                     System.out.println("1 - Save Department");
@@ -291,13 +329,18 @@ public class Main {
                     scan.nextLine();
 
                     switch (deptChoice) {
+
                         case 1:
                             System.out.print("Department ID   : ");
                             int deptID = scan.nextInt();
                             scan.nextLine();
                             System.out.print("Department Name : ");
                             String deptName = scan.nextLine();
-                            campusRegistrar.saveDepartment(new Department(deptID, deptName));
+                            try {
+                                campusRegistrar.saveDepartment(new Department(deptID, deptName));
+                            } catch (DuplicateDepartmentIDException e) {
+                                System.out.println("[ERROR] " + e.getMessage());
+                            }
                             break;
 
                         case 2:
@@ -307,6 +350,7 @@ public class Main {
                             System.out.print("Section ID    : ");
                             int targetSectionID = scan.nextInt();
                             scan.nextLine();
+
                             Section found = null;
                             for (Section sec : campusRegistrar.getSections()) {
                                 if (sec.getSectionID() == targetSectionID) {
@@ -314,10 +358,15 @@ public class Main {
                                     break;
                                 }
                             }
-                            if (found != null) {
-                                campusRegistrar.addSectionToDepartment(targetDeptID, found);
+                            if (found == null) {
+                                System.out.println("[ERROR] Section with ID " + targetSectionID
+                                        + " not found. Create it first.");
                             } else {
-                                System.out.println("Section with ID " + targetSectionID + " not found.");
+                                try {
+                                    campusRegistrar.addSectionToDepartment(targetDeptID, found);
+                                } catch (DepartmentNotFoundException e) {
+                                    System.out.println("[ERROR] " + e.getMessage());
+                                }
                             }
                             break;
 
@@ -343,12 +392,21 @@ public class Main {
                             System.out.print("Department ID : ");
                             int hierDeptID = scan.nextInt();
                             scan.nextLine();
-                            campusRegistrar.viewDepartmentHierarchy(hierDeptID);
+                            try {
+                                campusRegistrar.viewDepartmentHierarchy(hierDeptID);
+                            } catch (DepartmentNotFoundException e) {
+                                System.out.println("[ERROR] " + e.getMessage());
+                            }
                             break;
 
                         default:
                             System.out.println("Invalid department menu choice.");
                     }
+                    break;
+
+                case 9:
+                    System.out.println("Goodbye!");
+                    System.exit(0);
                     break;
 
                 default:

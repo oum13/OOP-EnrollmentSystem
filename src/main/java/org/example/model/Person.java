@@ -1,6 +1,6 @@
 package org.example.model;
 
-abstract class Person {
+public abstract class Person {
 
     private int ID;
     private String name;

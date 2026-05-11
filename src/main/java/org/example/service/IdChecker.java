@@ -6,14 +6,16 @@ public class IdChecker {
     Scanner scan = new Scanner(System.in);
     CourseReg courseRegistration;
     StudentReg studentRegistration;
+    SectionReg sectionRegistration;
     private int sc;
     private int id;
     private int identification;
     private boolean found = false;
 
-    public IdChecker(StudentReg studentRegistration, CourseReg courseRegistration){
+    public IdChecker(StudentReg studentRegistration, CourseReg courseRegistration, SectionReg sectionRegistration){
         this.courseRegistration = courseRegistration;
         this.studentRegistration = studentRegistration;
+        this.sectionRegistration = sectionRegistration;
     }
 
     public void checkID(int n){

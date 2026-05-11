@@ -12,3 +12,4 @@ public interface CourseReg {
     void displayAll();
     ArrayList<Course> getCourses();
 }
+

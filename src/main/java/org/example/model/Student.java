@@ -16,14 +16,4 @@ public class Student extends Person {
         this.program = program;
     }
 
-    public void display(){
-        System.out.println("Student ID: " + getID());
-        System.out.println("Student Name: " + getName());
-        System.out.println("Student Program: " + getProgram());
-        System.out.println();
-    }
-
-    public void mainTask() {
-        System.out.println("I study");
-    }
 }

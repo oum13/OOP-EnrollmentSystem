@@ -26,5 +26,4 @@ abstract class Person {
         this.ID = ID;
     }
 
-    public abstract void mainTask();
 }

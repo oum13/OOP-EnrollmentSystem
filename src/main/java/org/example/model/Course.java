@@ -39,10 +39,4 @@ public class Course {
         this.program = program;
     }
 
-    public void display(){
-        System.out.println("Course ID: " + getcourseID());
-        System.out.println("Course Name: " + getcourseName());
-        System.out.println("Program: " + getProgram());
-        System.out.println();
-    }
-}
+}

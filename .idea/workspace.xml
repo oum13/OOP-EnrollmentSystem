@@ -5,26 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0739972e-bf7b-4c44-9a41-930f665ec5af" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_11_2026_4_11_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_11_2026_4_11_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_11_2026_4_13_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_11_2026_4_13_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Section.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/service/SectionReg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/service/SectionRegistration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ReadME.md" beforeDir="false" afterPath="$PROJECT_DIR$/ReadME.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Instructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Instructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CampusRegistrar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CampusRegistrar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CourseReg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CourseReg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CourseRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CourseRegistration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/IdChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/IdChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/StudentRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/StudentRegistration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/TuitionFeePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/TuitionFeePayment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +53,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Section",
+    "git-widget-placeholder": "feature/department",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -90,8 +74,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\umiko\IdeaProjects\OOP-EnrollmentSystem\target\classes\images" />
       <recent name="C:\Users\umiko\IdeaProjects\OOP-EnrollmentSystem\src\main\resources\images" />
+      <recent name="C:\Users\umiko\IdeaProjects\OOP-EnrollmentSystem\target\classes\images" />
     </key>
   </component>
   <component name="RunManager">

@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.model.Course;
+import org.example.model.Department;
 import org.example.model.Instructor;
 import org.example.model.Section;
 import org.example.model.Student;
@@ -12,12 +13,15 @@ public class CampusRegistrar {
     private CourseReg courseReg;
     private TuitionFP tuitionFP;
     private SectionReg sectionReg;
+    private DepartmentReg departmentReg;
 
-    public CampusRegistrar(StudentReg studentReg, CourseReg courseReg, TuitionFP tuitionFP, SectionReg sectionReg) {
+    public CampusRegistrar(StudentReg studentReg, CourseReg courseReg, TuitionFP tuitionFP,
+                           SectionReg sectionReg, DepartmentReg departmentReg) {
         this.studentReg = studentReg;
         this.courseReg = courseReg;
         this.tuitionFP = tuitionFP;
         this.sectionReg = sectionReg;
+        this.departmentReg = departmentReg;
     }
 
     public void saveStudent(Student student) {
@@ -110,5 +114,35 @@ public class CampusRegistrar {
 
     public ArrayList<Section> getSections() {
         return sectionReg.getSections();
+    }
+
+    // ── Department ──────────────────────────────────────────────────────────
+
+    public void saveDepartment(Department department) {
+        departmentReg.saveDepartment(department);
+    }
+
+    public void addSectionToDepartment(int departmentID, Section section) {
+        departmentReg.addSectionToDepartment(departmentID, section);
+    }
+
+    public void displayDepartment(int departmentID) {
+        departmentReg.display(departmentID);
+    }
+
+    public void displayAllDepartments() {
+        departmentReg.displayAll();
+    }
+
+    public void removeDepartment(int departmentID) {
+        departmentReg.removeDepartment(departmentID);
+    }
+
+    public void viewDepartmentHierarchy(int departmentID) {
+        departmentReg.viewHierarchy(departmentID);
+    }
+
+    public ArrayList<Department> getDepartments() {
+        return departmentReg.getDepartments();
     }
 }

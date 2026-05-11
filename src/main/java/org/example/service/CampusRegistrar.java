@@ -1,5 +1,14 @@
 package org.example.service;
 
+import org.example.customexception.DepartmentNotFoundException;
+import org.example.customexception.DuplicateCourseIDException;
+import org.example.customexception.DuplicateDepartmentIDException;
+import org.example.customexception.DuplicateInstructorIDException;
+import org.example.customexception.DuplicateSectionIDException;
+import org.example.customexception.DuplicateStudentIDException;
+import org.example.customexception.InvalidPaymentAmountException;
+import org.example.customexception.SectionFullException;
+import org.example.customexception.SectionNotFoundException;
 import org.example.model.Course;
 import org.example.model.Department;
 import org.example.model.Instructor;
@@ -24,7 +33,7 @@ public class CampusRegistrar {
         this.departmentReg = departmentReg;
     }
 
-    public void saveStudent(Student student) {
+    public void saveStudent(Student student) throws DuplicateStudentIDException {
         studentReg.saveStudent(student);
     }
 
@@ -48,7 +57,7 @@ public class CampusRegistrar {
         return studentReg.getStudents();
     }
 
-    public void saveCourse(Course course) {
+    public void saveCourse(Course course) throws DuplicateCourseIDException {
         courseReg.saveCourse(course);
     }
 
@@ -76,7 +85,7 @@ public class CampusRegistrar {
         return tuitionFP.calculateTuitionFee(units, discountRate);
     }
 
-    public void makePayment(double amount) {
+    public void makePayment(double amount) throws InvalidPaymentAmountException {
         tuitionFP.makePayment(amount);
     }
 
@@ -88,7 +97,7 @@ public class CampusRegistrar {
         return tuitionFP.isFullyPaid(id);
     }
 
-    public void saveSection(Section section) {
+    public void saveSection(Section section) throws DuplicateSectionIDException {
         sectionReg.saveSection(section);
     }
 
@@ -104,11 +113,13 @@ public class CampusRegistrar {
         sectionReg.removeSection(sectionID);
     }
 
-    public void assignInstructor(int sectionID, Instructor instructor) {
+    public void assignInstructor(int sectionID, Instructor instructor)
+            throws SectionNotFoundException, DuplicateInstructorIDException {
         sectionReg.assignInstructor(sectionID, instructor);
     }
 
-    public boolean enrollStudentInSection(int sectionID, Student student) {
+    public boolean enrollStudentInSection(int sectionID, Student student)
+            throws SectionNotFoundException, SectionFullException {
         return sectionReg.enrollStudentInSection(sectionID, student);
     }
 
@@ -118,11 +129,11 @@ public class CampusRegistrar {
 
     // ── Department ──────────────────────────────────────────────────────────
 
-    public void saveDepartment(Department department) {
+    public void saveDepartment(Department department) throws DuplicateDepartmentIDException {
         departmentReg.saveDepartment(department);
     }
 
-    public void addSectionToDepartment(int departmentID, Section section) {
+    public void addSectionToDepartment(int departmentID, Section section) throws DepartmentNotFoundException {
         departmentReg.addSectionToDepartment(departmentID, section);
     }
 
@@ -138,7 +149,7 @@ public class CampusRegistrar {
         departmentReg.removeDepartment(departmentID);
     }
 
-    public void viewDepartmentHierarchy(int departmentID) {
+    public void viewDepartmentHierarchy(int departmentID) throws DepartmentNotFoundException {
         departmentReg.viewHierarchy(departmentID);
     }
 

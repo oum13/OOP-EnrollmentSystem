@@ -1,8 +1,7 @@
 # Enrollment System
 
 ---
-**Author**: Umiko Si
-lva
+**Author**: Umiko Silva
 
 **1. Output of simple enrollment system using setters and getters**
 
@@ -70,3 +69,17 @@ lva
 []()![img16.png](src/main/resources/images/img16.png)
 
 []()![img17.png](src/main/resources/images/img17.png)
+
+---
+# Custom Exceptions and TryCatch
+
+---
+**Created custom exceptions and implemented try catches**
+
+Sample Custom Exceptions
+
+[]()![img18.png](src/main/resources/images/img18.png)
+
+[]()![img19.png](src/main/resources/images/img19.png)
+
+[]()![img20.png](src/main/resources/images/img20.png)

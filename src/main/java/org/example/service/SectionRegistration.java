@@ -1,5 +1,9 @@
 package org.example.service;
 
+import org.example.customexception.DuplicateInstructorIDException;
+import org.example.customexception.DuplicateSectionIDException;
+import org.example.customexception.SectionFullException;
+import org.example.customexception.SectionNotFoundException;
 import org.example.model.Instructor;
 import org.example.model.Section;
 import org.example.model.Student;
@@ -11,7 +15,12 @@ public class SectionRegistration implements SectionReg {
     private ArrayList<Section> sections = new ArrayList<>();
 
     @Override
-    public void saveSection(Section section) {
+    public void saveSection(Section section) throws DuplicateSectionIDException {
+        for (Section s : sections) {
+            if (s.getSectionID() == section.getSectionID()) {
+                throw new DuplicateSectionIDException(section.getSectionID());
+            }
+        }
         sections.add(section);
         System.out.println("Section \"" + section.getSectionName() + "\" saved successfully.");
     }
@@ -26,9 +35,12 @@ public class SectionRegistration implements SectionReg {
             if (section.getSectionID() == sectionID) {
                 System.out.println("Section ID   : " + section.getSectionID());
                 System.out.println("Section Name : " + section.getSectionName());
-                System.out.println("Course       : " + (section.getCourse() != null ? section.getCourse().getcourseName() : "N/A"));
-                System.out.println("Instructor   : " + (section.getInstructor() != null ? section.getInstructor().getName() : "Not assigned"));
-                System.out.println("Enrollment   : " + section.getEnrolledStudents().size() + " / " + Section.MAX_CAPACITY);
+                System.out.println("Course       : " + (section.getCourse() != null ?
+                                                        section.getCourse().getcourseName() : "N/A"));
+                System.out.println("Instructor   : " + (section.getInstructor() != null ?
+                                                        section.getInstructor().getName() : "Not assigned"));
+                System.out.println("Enrollment   : " + section.getEnrolledStudents().size() + " / "
+                                                     + Section.MAX_CAPACITY);
                 System.out.println();
                 return;
             }
@@ -69,27 +81,41 @@ public class SectionRegistration implements SectionReg {
     }
 
     @Override
-    public void assignInstructor(int sectionID, Instructor instructor) {
+    public void assignInstructor(int sectionID, Instructor instructor)
+            throws SectionNotFoundException, DuplicateInstructorIDException {
         for (Section section : sections) {
             if (section.getSectionID() == sectionID) {
+                if (section.getInstructor() != null
+                        && section.getInstructor().getID() == instructor.getID()) {
+                    throw new DuplicateInstructorIDException(instructor.getID());
+                }
                 section.setInstructor(instructor);
                 System.out.println("Instructor \"" + instructor.getName()
                         + "\" assigned to section \"" + section.getSectionName() + "\".");
                 return;
             }
         }
-        System.out.println("Section with ID " + sectionID + " not found.");
+        throw new SectionNotFoundException(sectionID);
     }
 
     @Override
-    public boolean enrollStudentInSection(int sectionID, Student student) {
+    public boolean enrollStudentInSection(int sectionID, Student student)
+            throws SectionNotFoundException, SectionFullException {
         for (Section section : sections) {
             if (section.getSectionID() == sectionID) {
                 if (section.getEnrolledStudents().size() >= Section.MAX_CAPACITY) {
-                    System.out.println("Enrollment failed: Section \"" + section.getSectionName()
-                            + "\" is already at full capacity (" + Section.MAX_CAPACITY + " students).");
-                    return false;
+                    throw new SectionFullException(section.getSectionName(), Section.MAX_CAPACITY);
                 }
+
+                for (Student enrolledStudent : section.getEnrolledStudents()) {
+                    if (enrolledStudent.getID() == student.getID()) {
+                        System.out.println("Student \"" + student.getName()
+                                + "\" is already enrolled in section \""
+                                + section.getSectionName() + "\".");
+                        return false;
+                    }
+                }
+
                 section.getEnrolledStudents().add(student);
                 System.out.println("Student \"" + student.getName()
                         + "\" enrolled in section \"" + section.getSectionName()
@@ -97,8 +123,7 @@ public class SectionRegistration implements SectionReg {
                 return true;
             }
         }
-        System.out.println("Section with ID " + sectionID + " not found.");
-        return false;
+        throw new SectionNotFoundException(sectionID);
     }
 
     @Override

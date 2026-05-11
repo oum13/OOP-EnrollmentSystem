@@ -8,10 +8,6 @@ public class Instructor extends Person{
         super(name, ID);
     }
 
-    public void mainTask() {
-        System.out.println("I teach");
-    }
-
     public String getCourse() {
         return Courses;
     }

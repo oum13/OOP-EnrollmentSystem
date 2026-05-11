@@ -15,7 +15,10 @@ public class CourseRegistration implements CourseReg{
     public void display(int id){
         for (Course course : courses) {
             if (course.getcourseID() == id) {
-                course.display();
+                System.out.println("Course ID: " + course.getcourseID());
+                System.out.println("Course Name: " + course.getcourseName());
+                System.out.println("Program: " + course.getProgram());
+                System.out.println();
             }
         }
     }
@@ -55,7 +58,10 @@ public class CourseRegistration implements CourseReg{
 
     public void displayAll(){
         for (Course course : courses) {
-            course.display();
+            System.out.println("Course ID: " + course.getcourseID());
+            System.out.println("Course Name: " + course.getcourseName());
+            System.out.println("Program: " + course.getProgram());
+            System.out.println();
         }
     }
 

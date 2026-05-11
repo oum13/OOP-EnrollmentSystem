@@ -5,6 +5,8 @@ import org.example.model.Student;
 import org.example.model.Instructor;
 import org.example.service.StudentReg;
 import org.example.service.StudentRegistration;
+import org.example.service.SectionReg;
+import org.example.service.SectionRegistration;
 import org.example.service.CourseReg;
 import org.example.service.CourseRegistration;
 import org.example.service.TuitionFP;
@@ -18,13 +20,12 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-
         StudentReg studentReg = new StudentRegistration();
         CourseReg courseReg = new CourseRegistration();
+        SectionReg sectionReg = new SectionRegistration();
         TuitionFP tuitionFP = new TuitionFeePayment(studentReg);
-        CampusRegistrar campusRegistrar = new CampusRegistrar(studentReg, courseReg, tuitionFP);
-        IdChecker idChecker = new IdChecker(studentReg, courseReg);
-
+        CampusRegistrar campusRegistrar = new CampusRegistrar(studentReg, courseReg, tuitionFP, sectionReg);
+        IdChecker idChecker = new IdChecker(studentReg, courseReg, sectionReg);
         while(true){
             String name;
             String program;
@@ -64,7 +65,6 @@ public class Main {
 
                         Student p = new Student(id, name, program);
                         campusRegistrar.saveStudent(p);
-                        p.mainTask();
 
                         System.out.print("How many units? ");
                         int units = scan.nextInt();
@@ -175,9 +175,7 @@ public class Main {
 
                 case 7:
                     Student s = new Student(2020, "Nas", "IT");
-                    s.mainTask();
                     Instructor i = new Instructor("ASD", 123);
-                    i.mainTask();
                     break;
 
                 case 8:

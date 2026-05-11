@@ -2,7 +2,7 @@ package org.example.service;
 
 import java.util.ArrayList;
 
-public class TuitionFeePayment implements TuitionFP{
+public class TuitionFeePayment implements TuitionFP {
     ArrayList<Double> balances = new ArrayList<>();
 
     private double pricePerUnit = 1000.00;

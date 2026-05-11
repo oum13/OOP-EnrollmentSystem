@@ -1,6 +1,8 @@
 package org.example.service;
 
 import org.example.model.Course;
+import org.example.model.Instructor;
+import org.example.model.Section;
 import org.example.model.Student;
 
 import java.util.ArrayList;
@@ -9,11 +11,13 @@ public class CampusRegistrar {
     private StudentReg studentReg;
     private CourseReg courseReg;
     private TuitionFP tuitionFP;
+    private SectionReg sectionReg;
 
-    public CampusRegistrar(StudentReg studentReg, CourseReg courseReg, TuitionFP tuitionFP) {
+    public CampusRegistrar(StudentReg studentReg, CourseReg courseReg, TuitionFP tuitionFP, SectionReg sectionReg) {
         this.studentReg = studentReg;
         this.courseReg = courseReg;
         this.tuitionFP = tuitionFP;
+        this.sectionReg = sectionReg;
     }
 
     public void saveStudent(Student student) {
@@ -40,7 +44,6 @@ public class CampusRegistrar {
         return studentReg.getStudents();
     }
 
-
     public void saveCourse(Course course) {
         courseReg.saveCourse(course);
     }
@@ -61,6 +64,10 @@ public class CampusRegistrar {
         courseReg.displayAll();
     }
 
+    public ArrayList<Course> getCourses() {
+        return courseReg.getCourses();
+    }
+
     public double calculateTuitionFee(int units, double discountRate) {
         return tuitionFP.calculateTuitionFee(units, discountRate);
     }
@@ -75,5 +82,33 @@ public class CampusRegistrar {
 
     public boolean isFullyPaid(int id) {
         return tuitionFP.isFullyPaid(id);
+    }
+
+    public void saveSection(Section section) {
+        sectionReg.saveSection(section);
+    }
+
+    public void displaySection(int sectionID) {
+        sectionReg.display(sectionID);
+    }
+
+    public void displayAllSections() {
+        sectionReg.displayAll();
+    }
+
+    public void removeSection(int sectionID) {
+        sectionReg.removeSection(sectionID);
+    }
+
+    public void assignInstructor(int sectionID, Instructor instructor) {
+        sectionReg.assignInstructor(sectionID, instructor);
+    }
+
+    public boolean enrollStudentInSection(int sectionID, Student student) {
+        return sectionReg.enrollStudentInSection(sectionID, student);
+    }
+
+    public ArrayList<Section> getSections() {
+        return sectionReg.getSections();
     }
 }

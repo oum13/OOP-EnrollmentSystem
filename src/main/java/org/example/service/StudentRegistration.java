@@ -19,7 +19,11 @@ public class StudentRegistration implements StudentReg {
         }
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getID() == id) {
-                students.get(i).display();
+                Student s = students.get(i);
+                System.out.println("Student ID: " + s.getID());
+                System.out.println("Student Name: " + s.getName());
+                System.out.println("Student Program: " + s.getProgram());
+                System.out.println();
             }
         }
     }
@@ -78,7 +82,10 @@ public class StudentRegistration implements StudentReg {
         }
 
         for (Student student : students) {
-            student.display();
+            System.out.println("Student ID: " + student.getID());
+            System.out.println("Student Name: " + student.getName());
+            System.out.println("Student Program: " + student.getProgram());
+            System.out.println();
         }
     }
 

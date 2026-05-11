@@ -1,7 +1,8 @@
 # Enrollment System
 
 ---
-**Author**: Umiko Silva
+**Author**: Umiko Si
+lva
 
 **1. Output of simple enrollment system using setters and getters**
 
@@ -46,3 +47,16 @@
 
 []()![img11.png](target/classes/images/img11.png)
 
+---
+# Section
+
+---
+**Made Section and fixed the models**
+
+// The section is not yet configured to work in the main 
+
+[]()![img12.png](target/classes/images/img12.png)
+
+[]()![img13.png](target/classes/images/img13.png)
+
+[]()![img14.png](target/classes/images/img14.png)

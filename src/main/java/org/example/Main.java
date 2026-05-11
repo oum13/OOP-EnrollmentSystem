@@ -1,8 +1,10 @@
 package org.example;
 
 import org.example.model.Course;
+import org.example.model.Department;
 import org.example.model.Student;
 import org.example.model.Instructor;
+import org.example.model.Section;
 import org.example.service.StudentReg;
 import org.example.service.StudentRegistration;
 import org.example.service.SectionReg;
@@ -11,6 +13,8 @@ import org.example.service.CourseReg;
 import org.example.service.CourseRegistration;
 import org.example.service.TuitionFP;
 import org.example.service.TuitionFeePayment;
+import org.example.service.DepartmentReg;
+import org.example.service.DepartmentRegistration;
 import org.example.service.CampusRegistrar;
 import org.example.service.IdChecker;
 
@@ -24,7 +28,8 @@ public class Main {
         CourseReg courseReg = new CourseRegistration();
         SectionReg sectionReg = new SectionRegistration();
         TuitionFP tuitionFP = new TuitionFeePayment(studentReg);
-        CampusRegistrar campusRegistrar = new CampusRegistrar(studentReg, courseReg, tuitionFP, sectionReg);
+        DepartmentReg departmentReg = new DepartmentRegistration();
+        CampusRegistrar campusRegistrar = new CampusRegistrar(studentReg, courseReg, tuitionFP, sectionReg, departmentReg);
         IdChecker idChecker = new IdChecker(studentReg, courseReg, sectionReg);
         while(true){
             String name;
@@ -41,6 +46,7 @@ public class Main {
             System.out.println("6 - Tuition");
             System.out.println("7 - Stud or Ins");
             System.out.println("8 - Exit");
+            System.out.println("9 - Department");
             System.out.print("What? ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -180,6 +186,79 @@ public class Main {
 
                 case 8:
                     System.exit(0);
+                    break;
+
+                case 9:
+                    System.out.println("--- Department Menu ---");
+                    System.out.println("1 - Save Department");
+                    System.out.println("2 - Add Section to Department");
+                    System.out.println("3 - View Department");
+                    System.out.println("4 - View All Departments");
+                    System.out.println("5 - Remove Department");
+                    System.out.println("6 - View Institutional Hierarchy");
+                    System.out.print("Choice: ");
+                    int deptChoice = scan.nextInt();
+                    scan.nextLine();
+
+                    switch (deptChoice) {
+                        case 1:
+                            System.out.print("Department ID   : ");
+                            int deptID = scan.nextInt();
+                            scan.nextLine();
+                            System.out.print("Department Name : ");
+                            String deptName = scan.nextLine();
+                            campusRegistrar.saveDepartment(new Department(deptID, deptName));
+                            break;
+
+                        case 2:
+                            System.out.print("Department ID : ");
+                            int targetDeptID = scan.nextInt();
+                            scan.nextLine();
+                            System.out.print("Section ID    : ");
+                            int targetSectionID = scan.nextInt();
+                            scan.nextLine();
+                            Section found = null;
+                            for (Section sec : campusRegistrar.getSections()) {
+                                if (sec.getSectionID() == targetSectionID) {
+                                    found = sec;
+                                    break;
+                                }
+                            }
+                            if (found != null) {
+                                campusRegistrar.addSectionToDepartment(targetDeptID, found);
+                            } else {
+                                System.out.println("Section with ID " + targetSectionID + " not found.");
+                            }
+                            break;
+
+                        case 3:
+                            System.out.print("Department ID : ");
+                            int viewDeptID = scan.nextInt();
+                            scan.nextLine();
+                            campusRegistrar.displayDepartment(viewDeptID);
+                            break;
+
+                        case 4:
+                            campusRegistrar.displayAllDepartments();
+                            break;
+
+                        case 5:
+                            System.out.print("Department ID : ");
+                            int remDeptID = scan.nextInt();
+                            scan.nextLine();
+                            campusRegistrar.removeDepartment(remDeptID);
+                            break;
+
+                        case 6:
+                            System.out.print("Department ID : ");
+                            int hierDeptID = scan.nextInt();
+                            scan.nextLine();
+                            campusRegistrar.viewDepartmentHierarchy(hierDeptID);
+                            break;
+
+                        default:
+                            System.out.println("Invalid department menu choice.");
+                    }
                     break;
 
                 default:

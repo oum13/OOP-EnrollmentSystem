@@ -41,11 +41,11 @@ lva
 ---
 **Made Interfaces and made use of CampusRegistrar**
 
-[]()![img 9.png](target/classes/images/img%209.png)
+[]()![img 9.png](src/main/resources/images/img%209.png)
 
-[]()![img10.png](target/classes/images/img10.png)
+[]()![img10.png](src/main/resources/images/img10.png)
 
-[]()![img11.png](target/classes/images/img11.png)
+[]()![img11.png](src/main/resources/images/img11.png)
 
 ---
 # Section
@@ -55,8 +55,22 @@ lva
 
 // The section is not yet configured to work in the main 
 
-[]()![img12.png](target/classes/images/img12.png)
+[]()![img12.png](src/main/resources/images/img12.png)
 
-[]()![img13.png](target/classes/images/img13.png)
+[]()![img13.png](src/main/resources/images/img13.png)
 
-[]()![img14.png](target/classes/images/img14.png)
+[]()![img14.png](src/main/resources/images/img14.png)
+
+---
+# Department
+
+---
+**Made Department and Hierarchy**
+
+// Department implementation in main is not yet done
+
+[]()![img15.png](src/main/resources/images/img15.png)
+
+[]()![img16.png](src/main/resources/images/img16.png)
+
+[]()![img17.png](src/main/resources/images/img17.png)

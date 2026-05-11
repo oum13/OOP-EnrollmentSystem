@@ -44,9 +44,9 @@ public class Main {
             System.out.println("4 - Print All");
             System.out.println("5 - Update");
             System.out.println("6 - Tuition");
-            System.out.println("7 - Stud or Ins");
-            System.out.println("8 - Exit");
-            System.out.println("9 - Department");
+            System.out.println("7 - Section");
+            System.out.println("8 - Department");
+            System.out.println("9 - Exit");
             System.out.print("What? ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -180,15 +180,105 @@ public class Main {
                     break;
 
                 case 7:
-                    Student s = new Student(2020, "Nas", "IT");
-                    Instructor i = new Instructor("ASD", 123);
-                    break;
+                    System.out.println("--- Section Menu ---");
+                    System.out.println("1 - Create Section");
+                    System.out.println("2 - Create Instructor & Assign to Section");
+                    System.out.println("3 - Enroll Student in Section");
+                    System.out.println("4 - View Section");
+                    System.out.println("5 - View All Sections");
+                    System.out.println("6 - Remove Section");
+                    System.out.print("Choice: ");
+                    int secChoice = scan.nextInt();
+                    scan.nextLine();
 
-                case 8:
-                    System.exit(0);
+                    switch (secChoice) {
+
+                        case 1:
+                            System.out.print("Section ID   : ");
+                            int newSecID = scan.nextInt();
+                            scan.nextLine();
+                            System.out.print("Section Name : ");
+                            String newSecName = scan.nextLine();
+                            System.out.print("Course ID    : ");
+                            int pickedCourseID = scan.nextInt();
+                            scan.nextLine();
+
+                            Course pickedCourse = null;
+                            for (Course co : campusRegistrar.getCourses()) {
+                                if (co.getcourseID() == pickedCourseID) {
+                                    pickedCourse = co;
+                                    break;
+                                }
+                            }
+                            if (pickedCourse == null) {
+                                System.out.println("Course with ID " + pickedCourseID + " not found. Register it first.");
+                            } else {
+                                campusRegistrar.saveSection(new Section(newSecID, newSecName, pickedCourse));
+                            }
+                            break;
+
+                        case 2:
+                            System.out.print("Instructor Name : ");
+                            String instrName = scan.nextLine();
+                            System.out.print("Instructor ID   : ");
+                            int instrID = scan.nextInt();
+                            scan.nextLine();
+                            System.out.print("Section ID to assign to : ");
+                            int assignSecID = scan.nextInt();
+                            scan.nextLine();
+                            campusRegistrar.assignInstructor(assignSecID, new Instructor(instrName, instrID));
+                            break;
+
+                        case 3:
+                            System.out.print("Section ID : ");
+                            int enrollSecID = scan.nextInt();
+                            scan.nextLine();
+                            System.out.print("Student ID : ");
+                            int enrollStudID = scan.nextInt();
+                            scan.nextLine();
+
+                            Student enrollStudent = null;
+                            for (Student st : campusRegistrar.getStudents()) {
+                                if (st.getID() == enrollStudID) {
+                                    enrollStudent = st;
+                                    break;
+                                }
+                            }
+                            if (enrollStudent == null) {
+                                System.out.println("Student with ID " + enrollStudID + " not found. Register the student first.");
+                            } else {
+                                campusRegistrar.enrollStudentInSection(enrollSecID, enrollStudent);
+                            }
+                            break;
+
+                        case 4:
+                            System.out.print("Section ID : ");
+                            int viewSecID = scan.nextInt();
+                            scan.nextLine();
+                            campusRegistrar.displaySection(viewSecID);
+                            break;
+
+                        case 5:
+                            campusRegistrar.displayAllSections();
+                            break;
+
+                        case 6:
+                            System.out.print("Section ID : ");
+                            int remSecID = scan.nextInt();
+                            scan.nextLine();
+                            campusRegistrar.removeSection(remSecID);
+                            break;
+
+                        default:
+                            System.out.println("Invalid section menu choice.");
+                    }
                     break;
 
                 case 9:
+                    System.exit(0);
+                    break;
+
+                case 8:
                     System.out.println("--- Department Menu ---");
                     System.out.println("1 - Save Department");
                     System.out.println("2 - Add Section to Department");

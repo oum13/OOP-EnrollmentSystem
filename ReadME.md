@@ -53,8 +53,6 @@ lva
 ---
 **Made Section and fixed the models**
 
-// The section is not yet configured to work in the main 
-
 []()![img12.png](src/main/resources/images/img12.png)
 
 []()![img13.png](src/main/resources/images/img13.png)
@@ -66,8 +64,6 @@ lva
 
 ---
 **Made Department and Hierarchy**
-
-// Department implementation in main is not yet done
 
 []()![img15.png](src/main/resources/images/img15.png)
 

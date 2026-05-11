@@ -1,8 +1,7 @@
 # Enrollment System
 
 ---
-**Author**: Umiko Si
-lva
+**Author**: Umiko Silva
 
 **1. Output of simple enrollment system using setters and getters**
 
